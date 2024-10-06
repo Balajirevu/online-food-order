@@ -1,0 +1,75 @@
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORDERS</title>
+    <style>
+        @media (min-width: 1025px) {
+.h-custom {
+height: 100vh !important;
+}
+}
+</style>
+</head>
+<body>
+    <section class="h-100 h-custom">
+        <div class="container h-100 py-5">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+      
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    {% for i in cart_items %}
+                    <tr>
+                      <th scope="col" class="h5">Food image</th>
+                      <th scope="col">Food item</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Availability</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Action</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">
+                        <div class="d-flex align-items-center">
+                          <img src="{{ i.menu.item_image.url }}" class="img-fluid rounded-3"
+                            style="width: 120px;" alt="Book">
+                        </div>
+                      </th>
+                      <td class="align-middle">
+                        <p class="mb-0" style="font-weight: 500;">{{ i.menu.item_name }}</p>
+                      </td>
+                      <td class="align-middle">
+                        <p class="mb-0" style="font-weight: 500;">{{ i.menu.quantity }}</p>
+                      </td>
+                      </td>
+                      <td class="align-middle">
+                        <input type="checkbox" name="" id="" checked="{{ i.is_available }}" >
+                      </td>
+                      <td class="align-middle">
+                        <p class="mb-0" style="font-weight: 500;">{{ i.menu.item_price }} </p><br>
+                        <p><a href="{% url 'tomato:remove_from_cart' i.menu_id %}"> Remove</a></p>
+                      </td> 
+                      <td class="align-middle">
+                        <a data-mdb-ripple-init class="btn btn-outline-dark btn-lg" href="{% url 'tomato:order' i.menu_id %}" role="button"
+                          >Order Now</a>
+                      </td>               
+                    </tr>
+                    {% endfor %}   
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <a data-mdb-ripple-init class="btn btn-outline-dark btn-lg" href="{% url 'tomato:res' %}" role="button"
+                >To Continue order</a> 
+</div>
+</body>
+</html>

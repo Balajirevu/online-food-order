@@ -1,0 +1,96 @@
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Product Catalog</title>
+	<style>
+		/* Add CSS styles for flex container and items */
+		.product-list {
+			display: flex;
+			flex-wrap: wrap; /* Allow items to wrap to the next row if necessary */
+			justify-content: space-between; /* Space items evenly along the main axis */
+			list-style: none; /* Remove list styles */
+			padding: 0;
+		}
+
+		.product-item {
+			flex: 1; /* Grow to fill available space evenly */
+			max-width: 30%; /* Limit item width to avoid overcrowding */
+			margin: 10px; /* Add spacing between items */
+			border: 1px solid #ccc; /* Add a border for visual separation */
+			padding: 10px;
+			text-align: center;
+		}
+
+		/* Style the "Buy Now" button */
+		.buy-now-button {
+			display: block;
+			margin-top: 10px;
+			background-color: #1d7ce2;
+			color: #fff;
+			text-decoration: none;
+			padding: 5px 10px;
+			border-radius: 5px;
+		}
+		#yellow{
+			background-color: rgb(38, 21, 234);
+		}
+		a{
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	 <!-- Navbar -->
+	 <nav class="navbar fixed-top   navbar-expand-lg " id="yellow" data-bs-theme="white">
+          
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+	  
+		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+		  <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+			<li class="nav-item ">
+			  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" href="#about">about</a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link " href="#contact">contact us</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link " href="{% url 'tomato:pro' %}">profile</a>
+			  </li>
+		  </ul>
+		  <form class="form-inline my-2 my-lg-0">
+			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+				<li class="nav-item ">
+				  <a class="nav-link" href="{% url 'tomato:viewcart' %}"><img src="../media/shopping-cart.png" width="30px" alt=""><span class="sr-only">(current)</span></a>
+				</li>
+				</ul>
+		  </form>
+		</div>
+	  </nav>     
+	  <br><br><br>
+
+	<h1>FOOD ITEMS CATALOG</h1>
+	
+	<ul class="product-list">
+		{% for i in filter1 %}
+			<li class="product-item">
+				<img src="{{ product.item_image.url }}" alt="{{ product.item_name }}" width="200" height="150">
+				<h2>{{ i.item_name }}</h2>
+				<p>{{ i.item_description }}</p>
+				<p>Price: ${{ i.item_price }}</p>
+				<a href="{% url 'tomato:buynow' i.menu_id %}" class="buy-now-button">Buy Now</a>
+				<a class="buy-now-button" href="{% url 'tomato:addtocart' i.menu_id %}">Add to Cart</a>
+
+			</li>
+		{% endfor %}
+	</ul>
+</body>
+</html>

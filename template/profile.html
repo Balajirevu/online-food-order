@@ -1,0 +1,69 @@
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PROFILE</title>
+  <style>
+    a{
+      text-decoration: none;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <form action="" method="post">
+  {% csrf_token %}
+  {% for i in data %}
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div data-mdb-input-init class="form-outline">
+        <label class="form-label" for="form3Example1">First name</label>
+        <input type="text" id="form3Example1" class="form-control" name="first_name" value="{{ i.first_name }}"/>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div data-mdb-input-init class="form-outline">
+        <label class="form-label" for="form3Example2">Last name</label>
+        <input type="text" id="form3Example2" class="form-control" name="last_name" value="{{ i.last_name }}"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- Email input -->
+  <div data-mdb-input-init class="form-outline mb-4">
+    <label class="form-label" for="form3Example3">Email address</label>
+    <input type="email" id="form3Example3" class="form-control" name="email" value="{{ i.email }}"/>
+  </div>
+
+  <!-- Password input -->
+  <div data-mdb-input-init class="form-outline mb-4">
+    <label class="form-label" for="form3Example4">Password</label>
+    <input type="password" id="form3Example4" class="form-control" name="password" value="{{ i.password }}" />
+  </div>
+  <!-- username -->
+  <div data-mdb-input-init class="form-outline mb-4">
+    <label class="form-label" for="form3Example4">username</label>
+    <input type="text" id="form3Example4" class="form-control" name="username" value="{{ i.username }}" />
+  </div>
+   <!-- phone -->
+   <div data-mdb-input-init class="form-outline mb-4">
+     <label class="form-label" for="form3Example4">phone</label>
+    <input type="number" id="form3Example4" class="form-control" name="user_phone" value="{{ i.user_phone }}" />
+  </div>
+   <!-- address -->
+   <div data-mdb-input-init class="form-outline mb-4">
+     <label class="form-label" for="form3Example4">address</label>
+    <input type="text" id="form3Example4" class="form-control" name="user_address" value="{{ i.user_address }}"/>
+  </div>
+  <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-inline  mb-4"><a href="{% url 'tomato:logout' %}">Logout</a>
+   
+  </button>
+</form>
+  {% endfor %}
+
+</body>
+</html>
